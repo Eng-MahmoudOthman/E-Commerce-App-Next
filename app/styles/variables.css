@@ -1,0 +1,29 @@
+
+
+
+
+:root{
+   /* Color Style */
+   --main-color:#0651c1;
+   --primary-color: rgb(73, 148, 246);
+   --second-color: #feae35;
+   --third-color: rgb(52, 123, 216);
+   
+   
+
+   /* Button Style */
+   --btnHover-color: #05b8b8;
+   
+
+
+   /* Font Size */
+   --main-font-size: 16px ;
+   
+   
+   /* Transition Style */
+   --main-transition: 0.4s ease;
+-webkit-transition: 0.2s ease;
+-moz-transition: 0.2s ease;
+-ms-transition: 0.2s ease;
+-o-transition: 0.2s ease;
+}

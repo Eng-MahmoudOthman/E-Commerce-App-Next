@@ -1,0 +1,104 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Knewave&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+@import "./variables.css";
+
+
+
+
+
+
+/*&==========Start Global Rules ===========*/
+*{
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+}
+
+html{
+   scroll-behavior: smooth;
+   font-size: var(--main-font-size);
+}
+
+body{
+   font-family: "Tajawal", sans-serif;
+}
+
+ul{
+   list-style: none;
+   margin: 0;
+   padding: 0;
+}
+a{
+   text-decoration: none !important;
+   color: white;
+}
+.main-color {
+   color:var(--main-color) !important ;
+}
+.second-color {
+   color:var(--second-color) !important ;
+}
+.bg-main {
+   background-color:var(--main-color) !important;
+   color: white !important;
+}
+.bg-color:hover {
+   background-color: var(--btnHover-color) !important;
+} 
+.main-header {
+   text-align: center;
+   color: var(--main-color);
+   margin:auto;
+   font-size: 1.5rem;
+   font-weight: bold;
+   /* width: fit-content; */
+}
+.under-header {
+   position: relative;
+   /* text-align: center; */
+   color: var(--main-color);
+   margin: 0.6rem auto 6.3rem auto ;
+   font-size: 2.5rem;
+   font-weight: bold;
+   width: 20%;
+}
+
+
+
+
+
+
+/*& ========== Start Global Input Style ===========================   */
+.icon-input-field {
+   position: absolute;
+   top: 2.6rem;
+   left: 1.3rem;
+   color: var(--main-color);
+} 
+.form-control {
+   padding-left: 3.1rem;
+   outline: 1px solid var(--main-color);
+}
+.toggle-password {
+   position: absolute;
+   top: 2.7rem;
+   right: 1.3rem;
+   color: var(--main-color);
+}
+
+
+
+/*^ Global Style Label Required=======  */
+label.required::after {
+   content: "*";
+   color: red;
+   position: relative;
+   left: 0.6rem;
+   top: 0.6rem;
+   font-weight: bold;
+}
+
+
+
+/*& ========== End Global Input Style ===========================   */
