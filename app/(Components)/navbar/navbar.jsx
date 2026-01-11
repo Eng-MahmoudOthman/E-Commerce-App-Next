@@ -1,14 +1,13 @@
-'use client'
+'use client' ;
 import Link from 'next/link.js';
-import { redirect, usePathname } from 'next/navigation.js';
+import { useRouter , usePathname } from 'next/navigation.js';
 import React, { useContext } from 'react'
 import { AuthContext } from '../../context/AuthProvider.jsx';
 
 
 
-
-
 export default function Navbar() {
+   const router = useRouter();
    const{user, role,  logout, isLogged} = useContext(AuthContext) ;
    const pathName = usePathname() ;
 
@@ -23,7 +22,7 @@ export default function Navbar() {
    ]
    
    return (
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top" >
          <div className="container-fluid">
             <a className="navbar-brand" href="#">Navbar <i className="fa-regular fa-house"></i></a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +48,7 @@ export default function Navbar() {
                      </>
 
                         : 
-                        <button className='btn btn-outline-danger btn-sm' onClick={()=>{redirect("/auth/login")}}>login</button>
+                        <button className='btn btn-outline-danger btn-sm' onClick={()=>{router.push("/auth/login")}}>login</button>
                   }
                </div>
             </div>

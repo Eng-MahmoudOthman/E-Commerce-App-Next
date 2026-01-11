@@ -18,7 +18,8 @@ export default function AuthContextProvider({ children }) {
       try {
          setLoading(true);
          setError(null);
-         const res = await fetch("http://localhost:5000/api/v1/auth/login" , {
+         
+         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login` , {
             method: "POST",
             credentials: "include", // هيرسل الكوكيز من السيرفر
             headers: { "Content-Type": "application/json" },
@@ -48,7 +49,7 @@ export default function AuthContextProvider({ children }) {
       try {
          setLoading(true);
          setError(null);
-         const res = await fetch("http://localhost:5000/api/v1/auth/register" , {
+         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/register` , {
             method: "POST",
             credentials: "include", // هيرسل الكوكيز من السيرفر
             headers: { "Content-Type": "application/json" },
@@ -72,7 +73,7 @@ export default function AuthContextProvider({ children }) {
 
    const logout = async () => {
       try {
-         const res = await fetch("http://localhost:5000/api/v1/auth/logOut", {
+         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/logOut`, {
             method: "PATCH",
             credentials: "include",
          });
@@ -98,7 +99,7 @@ export default function AuthContextProvider({ children }) {
          try {
             setLoading(true);
             setError(null);
-            const res = await fetch("http://localhost:5000/api/v1/users/getProfile" , {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/getProfile` , {
                method: "GET",
                credentials: "include", // هيرسل الكوكيز من السيرفر
                headers: { "Content-Type": "application/json" }
@@ -106,15 +107,15 @@ export default function AuthContextProvider({ children }) {
             const data = await res.json();
             if(res.ok){
                setLoading(false) ;
-               setUser(data.user) ;
-               setRole(data.user.role) ;
+               setUser(data?.user) ;
+               setRole(data?.user.role) ;
             }else{
                setLoading(false) ;
                setError(data?.message || "Get User Data Failed .") ;
                throw new Error("Get User Data Failed .") ;
             }
          } catch (error) {
-            toast.error(error.response.data.message || "Get User Data Failed .");
+            toast.error(error.response?.data.message || "Get User Data Failed .");
          }
       };
       getUser() ;
@@ -137,14 +138,3 @@ export default function AuthContextProvider({ children }) {
       </AuthContext.Provider>
    );
 }
-
-
-
-// isLogged: !!user يعني هل فيه مستخدم مسجل دخول؟ يعطي true أو false
-
-// user ممكن يكون:
-// null → المستخدم مش مسجل دخول
-// Object → المستخدم مسجل دخول
-// !!user يحول ده ل Boolean فقط:
-// null → false
-// Object → true

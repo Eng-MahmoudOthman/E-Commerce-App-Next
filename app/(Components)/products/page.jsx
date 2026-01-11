@@ -1,13 +1,15 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react' ;
 import { getProducts } from '../../lib/api/products.js';
-import ProductCard from '../productCard/productCard.jsx';
+import ProductCard from './ProductCard.jsx';
 
 
+export const metadata = {
+	title: "Products",
+	description: "Get All Products From E-Commerce",
+};
 
 export default async function Products() {
    const res = await getProducts() ;
-   console.log(res);
-   
    const products = res.products ;
    
    return (

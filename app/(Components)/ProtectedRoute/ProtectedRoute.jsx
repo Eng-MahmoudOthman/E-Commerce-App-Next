@@ -19,6 +19,6 @@ export default function ProtectedRoute({ children, allowedRoles, redirectTo = "/
       }
    }, []);
 
-   if (loading) return <p>Loading...</p>;
+   if (loading) return <p>Loading...</p> ;
    return children;
 }
