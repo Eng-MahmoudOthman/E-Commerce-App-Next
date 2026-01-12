@@ -1,6 +1,6 @@
 import Link from 'next/link.js' ;
 import React from 'react' ;
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.jsx';
+import ProtectedRoute from '../protectedRoute/ProtectedRoute.jsx';
 
 export default function layout({children}) {
    

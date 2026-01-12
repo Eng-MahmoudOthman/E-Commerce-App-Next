@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import { AuthContext } from "../../../context/AuthProvider.jsx";
 import { useRouter } from "next/navigation";
 import style from "./register.module.css" ;
-import ToastProvider from "../../ToastProvider/ToastProvider.jsx";
+import ToastProvider from "../../toastProvider/ToastProvider.jsx";
 
 
 export default function Register(){
