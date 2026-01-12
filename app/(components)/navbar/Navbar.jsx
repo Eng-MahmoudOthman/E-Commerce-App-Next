@@ -51,7 +51,9 @@ export default function Navbar() {
                               <button className='btn btn-outline-danger btn-sm' onClick={()=>{logout()}}>Logout</button>
                            </>
                         : 
-                           <button className='btn btn-outline-danger btn-sm' onClick={()=>{router.push("/auth/login")}}>login</button>
+                           // <button className='btn btn-outline-danger btn-sm' onClick={()=>{router.push("/auth/login")}}>login</button>
+                           <Link className="btn btn-outline-danger btn-sm"  href="/auth/login">Login</Link>
+
                   }
                </div>
             </div>

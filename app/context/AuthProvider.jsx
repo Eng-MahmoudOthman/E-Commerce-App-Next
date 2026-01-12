@@ -97,6 +97,7 @@ export default function AuthContextProvider({ children }) {
             headers: { "Content-Type": "application/json" }
          });
          const data = await res.json();
+         
          if(res.ok){
             setUser(data?.user) ;
             setRole(data?.user.role) ;
