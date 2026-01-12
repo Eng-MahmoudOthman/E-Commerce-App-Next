@@ -8,8 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css" ;
 
 import Providers from "./providers.js";
 import AuthContextProvider from "./context/AuthProvider.jsx";
-import Navbar from "./components/navbar/Navbar.jsx";
-import Footer from "./components/footer/Footer.jsx";
+import Navbar from "./(Components)/Navbar/Navbar.jsx";
+import Footer from "./(Components)/Footer/Footer.jsx";
 import "./styles/global.css" ;
 
 
