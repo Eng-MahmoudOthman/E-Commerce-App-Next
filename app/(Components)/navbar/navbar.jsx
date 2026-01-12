@@ -1,13 +1,15 @@
 'use client' ;
+
+
 import Link from 'next/link.js';
 import { useRouter , usePathname } from 'next/navigation.js';
-import React, { useContext } from 'react'
+import React, { useContext } from 'react' ;
 import { AuthContext } from '../../context/AuthProvider.jsx';
 
 
 
 export default function Navbar() {
-   const router = useRouter();
+   const router = useRouter() ;
    const{user, role,  logout, isLogged} = useContext(AuthContext) ;
    const pathName = usePathname() ;
 
@@ -19,7 +21,8 @@ export default function Navbar() {
       {path:"/categories/fashion" , link:"Categories" , role:"user"} ,
       {path:"/dashboard/users" , link:"Dashboard" , role:"admin"} ,
       {path:"/admin/users" , link:"Admin" , role:"admin"} ,
-   ]
+   ] ;
+
    
    return (
       <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top" >
@@ -42,13 +45,13 @@ export default function Navbar() {
 
                <div>
                   {
-                     isLogged? <>
-                        <Link className="text-black mx-3"  href="/">{user?.name}</Link>
-                        <button className='btn btn-outline-danger btn-sm' onClick={()=>{logout()}}>Logout</button>
-                     </>
-
+                     isLogged? 
+                           <>
+                              <Link className="text-black mx-3"  href="/">{user?.name}</Link>
+                              <button className='btn btn-outline-danger btn-sm' onClick={()=>{logout()}}>Logout</button>
+                           </>
                         : 
-                        <button className='btn btn-outline-danger btn-sm' onClick={()=>{router.push("/auth/login")}}>login</button>
+                           <button className='btn btn-outline-danger btn-sm' onClick={()=>{router.push("/auth/login")}}>login</button>
                   }
                </div>
             </div>

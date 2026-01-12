@@ -18,19 +18,16 @@ export default function Login() {
    async function submitLogin (values , { resetForm }){
       const data = await login(values) ;
       resetForm() ; // Reset Form
-      // router.push('/') ; // Client Side Redirect
       if(data.user?.role === "user"){
          router.push('/') ; // Client Side Redirect
       }else if(data.user?.role === "admin"){
          router.push('/dashboard/users') ; // Client Side Redirect
       }
-      console.log(data);
-      
    }
 
    const validationSchema = Yup.object({
       userAccount:Yup.string().required("Email or Phone Number is Required").trim() ,
-      password:Yup.string().required("Password is Required").matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]?).{7,}$/ , "should be Password Start UpperCase And Contain 8 Character And Contain any (@#$%&*)") ,
+      password:Yup.string().required("Password is Required").matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%&*]).{8,}$/,"Password must contain at least 8 characters, including uppercase, lowercase, a number, and a special character (@#$%&*)") ,
       rememberMe:Yup.boolean().oneOf([true , false]).default(false)
    });
 

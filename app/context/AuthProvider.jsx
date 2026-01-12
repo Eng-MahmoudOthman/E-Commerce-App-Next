@@ -1,8 +1,8 @@
 "use client" ;
 
-import { createContext, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { createContext, useState, useEffect } from "react" ;
+import { useRouter } from "next/navigation" ;
+import { toast } from "react-toastify" ;
 
 
 export const AuthContext = createContext(null);
@@ -14,14 +14,16 @@ export default function AuthContextProvider({ children }) {
    const [error , setError] = useState(null);
    const [loading , setLoading] = useState(false);
 
+
+
+
    const login = async (values) => {
       try {
          setLoading(true);
          setError(null);
-         
          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login` , {
             method: "POST",
-            credentials: "include", // هيرسل الكوكيز من السيرفر
+            credentials: "include", 
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(values),
          });
@@ -34,17 +36,13 @@ export default function AuthContextProvider({ children }) {
             return data ;
          }else{
             setLoading(false);
-            toast.error(data?.message || "Login failed") ;
             setError(data?.message || "Login failed") ;
-            throw new Error("Login failed") ;
+            throw new Error(data?.message || "Login failed") ;
          }
       } catch (error) {
-         toast.error(error.response.data.message) ;
+         toast.error(error.message) ;
       }
    };
-
-
-
    const register = async (values) => {
       try {
          setLoading(true);
@@ -61,16 +59,14 @@ export default function AuthContextProvider({ children }) {
             setLoading(false);
          }else{
             setLoading(false);
-            toast.error(data?.message || "Register failed .");
             setError(data?.message || "Register failed");
-            throw new Error("Register failed");
+            throw new Error(data?.message || "Register failed .");
          }
       } catch (error) {
-         toast.error(error.response.data.message) ;
+         toast.error(error.message) ;
       }
 
    };
-
    const logout = async () => {
       try {
          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/logOut`, {
@@ -86,38 +82,35 @@ export default function AuthContextProvider({ children }) {
             let msg = data?.message  || "Log Out failed."
             setLoading(false);
             setError(msg);
-            toast.error(msg);
             throw new Error(msg);
          }
       } catch (error) {
-         toast.error(error.response.data.message || "Log Out failed.");
+         toast.error(error.message);
+      }
+   };
+   const getUser = async () => {
+      try {
+         setError(null);
+         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/getProfile` , {
+            method: "GET",
+            credentials: "include" ,
+            headers: { "Content-Type": "application/json" }
+         });
+         const data = await res.json();
+         if(res.ok){
+            setUser(data?.user) ;
+            setRole(data?.user.role) ;
+         }else{
+            throw new Error("Data Failed, Please Login.") ;
+         }
+      } catch (error) {
+         console.log(error.message || "Get User Data Failed .");
+         // toast.error(error.message || "Get User Data Failed .");
       }
    };
 
+
    useEffect(() => {
-      const getUser = async () => {
-         try {
-            setLoading(true);
-            setError(null);
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/getProfile` , {
-               method: "GET",
-               credentials: "include", // هيرسل الكوكيز من السيرفر
-               headers: { "Content-Type": "application/json" }
-            });
-            const data = await res.json();
-            if(res.ok){
-               setLoading(false) ;
-               setUser(data?.user) ;
-               setRole(data?.user.role) ;
-            }else{
-               setLoading(false) ;
-               setError(data?.message || "Get User Data Failed .") ;
-               throw new Error("Get User Data Failed .") ;
-            }
-         } catch (error) {
-            toast.error(error.response?.data.message || "Get User Data Failed .");
-         }
-      };
       getUser() ;
    }, []) ;
 
