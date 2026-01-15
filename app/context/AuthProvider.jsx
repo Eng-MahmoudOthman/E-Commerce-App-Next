@@ -68,26 +68,27 @@ export default function AuthContextProvider({ children }) {
 
    };
    const logout = async () => {
+      setLoading(true);
       try {
          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/logOut`, {
             method: "PATCH",
             credentials: "include",
          });
+         const data = await res.json();
          if (res.ok){
-            const data = await res.json();
-            router.push('/auth/login') ; // Client Side Redirect
             setUser(null);
             setRole("user");
+            router.push('/auth/login') ; // Client Side Redirect
          }else{
             let msg = data?.message  || "Log Out failed."
-            setLoading(false);
             setError(msg);
             throw new Error(msg);
          }
       } catch (error) {
          toast.error(error.message);
       }
-   };
+      setLoading(false);
+   } ;
    const getUser = async () => {
       try {
          setError(null);
@@ -108,7 +109,7 @@ export default function AuthContextProvider({ children }) {
          console.log(error.message || "Get User Data Failed .");
          // toast.error(error.message || "Get User Data Failed .");
       }
-   };
+   } ;
 
 
    useEffect(() => {
@@ -131,4 +132,5 @@ export default function AuthContextProvider({ children }) {
          {children}
       </AuthContext.Provider>
    );
+   
 }

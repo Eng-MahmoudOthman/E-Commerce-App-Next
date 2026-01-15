@@ -5,12 +5,13 @@ import Link from 'next/link.js';
 import { useRouter , usePathname } from 'next/navigation.js';
 import React, { useContext } from 'react' ;
 import { AuthContext } from '../../context/AuthProvider.jsx';
+import Loading from '../../loading.jsx';
 
 
 
 export default function Navbar() {
    const router = useRouter() ;
-   const{user, role,  logout, isLogged} = useContext(AuthContext) ;
+   const{user, role,  logout, isLogged , loading} = useContext(AuthContext) ;
    const pathName = usePathname() ;
 
    const links = [
@@ -48,12 +49,15 @@ export default function Navbar() {
                      isLogged? 
                            <>
                               <Link className="text-black mx-3"  href="/">{user?.name}</Link>
-                              <button className='btn btn-outline-danger btn-sm' onClick={()=>{logout()}}>Logout</button>
+                              {loading? 
+                                    <button className='btn btn-outline-danger btn-sm'>Loading...</button> 
+                                 :
+                                    <button className='btn btn-outline-danger btn-sm' onClick={()=>{logout()}}>Logout</button>
+                              }
                            </>
                         : 
                            // <button className='btn btn-outline-danger btn-sm' onClick={()=>{router.push("/auth/login")}}>login</button>
                            <Link className="btn btn-outline-danger btn-sm"  href="/auth/login">Login</Link>
-
                   }
                </div>
             </div>
